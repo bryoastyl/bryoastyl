@@ -1,0 +1,181 @@
+{% extends 'base.html' %} {% load humanize %} {% block title %} | Welcome
+{% endblock %} {% block content %}
+<!-- Showcase -->
+<section id="showcase">
+  <div class="container text-center">
+    <div class="home-search p-5">
+      <div class="overlay p-5">
+        <h1 class="display-4 mb-4">Zero Hunger Just Got Solved</h1>
+        <p class="lead">
+          DaryMeal offers a way to achieve this to enable achieve zero hunger.
+          We have come up with a working solution that help street kids, orphanages and/or 
+          areas struck by this calamity/natural disaster. 
+        </p>
+        <div class="search">
+          <form action="{% url 'search' %}">
+            <!-- Form Row 1 -->
+            <div class="form-row">
+              <div class="col-md-4 mb-3">
+                <label class="sr-only">Keywords</label>
+                <input
+                  type="text"
+                  name="keywords"
+                  class="form-control"
+                  placeholder="Keyword (Shop, Hotel, Orphanage etc)"
+                />
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label class="sr-only">County</label>
+                <input
+                  type="text"
+                  name="city"
+                  class="form-control"
+                  placeholder="County"
+                />
+              </div>
+
+              <div class="col-md-4 mb-3">
+                <label class="sr-only">Sub County</label>
+                <select name="state" class="form-control">
+                  <option selected="true" disabled="disabled">
+                    Subcounty (All)
+                  </option>
+                  {% for key,value in subcounty_choices.items %}
+                  <option value="{{ key }}">{{ value }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <!-- Form Row 2 -->
+            <div class="form-row">
+              <div class="col-md-6 mb-3">
+                <label class="sr-only">Location</label>
+                <select name="bedrooms" class="form-control">
+                  <option selected="true" disabled="disabled">
+                    Location (All)
+                  </option>
+                  {% for key,value in location_choices.items %}
+                  <option value="{{ key }}">{{ value }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+              <div class="col-md-6 mb-3">
+                <select name="Sub Location" class="form-control" id="type">
+                  <option selected="true" disabled="disabled">
+                    Sub Location (Any)
+                  </option>
+                  {% for key,value in sublocation_choices.items %}
+                  <option value="{{ key }}">{{ value }}</option>
+                  {% endfor %}
+                </select>
+              </div>
+            </div>
+            <button class="btn btn-secondary btn-block mt-4" type="submit">
+              Submit form
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<br />
+<!-- Alerts -->
+{% include 'partials/_alerts.html' %}
+
+<!-- entries -->
+<section id="entries" class="py-5">
+  <div class="container">
+    <h3 class="text-center mb-3">Latest Entries</h3>
+    <div class="row">
+      {% if entries %} {% for entry in entries %}
+      <!-- Entry 1 -->
+      <div class="col-md-6 col-lg-4 mb-4">
+        <div class="card entry-preview">
+          <img class="card-img-top" src="{{ entry.photo_main.url }}" alt="" />
+          <div class="card-img-overlay">
+            <h2>
+              <span class="badge badge-secondary text-white"
+                >${{ entry.title | intcomma }}</span
+              >
+            </h2>
+          </div>
+          <div class="card-body">
+            <div class="entry-heading text-center">
+              <h4 class="text-primary">{{ entry.title }}</h4>
+              <p>
+                <i class="fas fa-map-marker text-secondary"></i> {{ entry.city  }} {{ entry.state }}, {{ entry.zipcode }}
+              </p>
+            </div>
+            <hr />
+            </div>
+              <div class="col-6">
+                <i class="fas fa-bath"></i> Delivery: {{ entry.delivery }}
+              </div>
+            </div>
+            <hr />
+            <div class="row py-2 text-secondary">
+              <div class="col-6">
+                <i class="fas fa-user"></i> {{ entry.cater }}
+              </div>
+            </div>
+            <div class="row text-secondary pb-2">
+              <div class="col-6">
+                <i class="fas fa-clock"></i> {{ entry.list_date | timesince }}
+              </div>
+            </div>
+            <hr />
+            <a
+              href="{% url 'entry' entry.id %}"
+              class="btn btn-primary btn-block"
+              >More Info</a>
+          </div>
+        </div>
+      </div>
+      {% endfor %} {% else %}
+      <div class="col-md-12">
+        <p>No entries Available</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+<section id="services" class="py-5 bg-secondary text-white">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-4">
+        <i class="fas fa-comment fa-4x mr-4"></i>
+        <hr />
+        <h3>Consulting Services</h3>
+        <p>
+          We have a very capable team that will be managing the site and 
+          provide any care and/or query which you may have. We have a feedback
+          system setup that answers within minutes.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <i class="fas fa-home fa-4x mr-4"></i>
+        <hr />
+        <h3>Contributions Management</h3>
+        <p>
+          This systems runs on a secure block chain 
+          to ensure any transaction paid is secure and not mishandled 
+          by any group.
+        </p>
+      </div>
+      <div class="col-md-4">
+        <i class="fas fa-suitcase fa-4x mr-4"></i>
+        <hr />
+        <h3>Payments</h3>
+        <p>
+          We have setup a payment system where anyone willing to make any
+          contribution can do so with ease and convinience of their homes,
+          workplace or anywhere else.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+{% endblock %}

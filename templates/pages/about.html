@@ -1,0 +1,116 @@
+{% extends 'base.html' %} {% load static %} {% block title %} | About Us
+{%endblock %} {% block content %}
+<section id="showcase-inner" class="py-5 text-white">
+  <div class="container">
+    <div class="row text-center">
+      <div class="col-md-12">
+        <h1 class="display-4">About DaryMeal</h1>
+        <p class="lead">
+          DaryMeal is an app put in place where any individual 
+          near a certain residential area can be able to 
+          identify a shop, hotel and/or orphanage that is registered with us and 
+          make a payment however small thus contributing to feed any starving individuals 
+          around you as charity begins at home. The transactions will be regulated 
+          on a block chain platform to allow for credibility and openness. 
+          The meals/snacks will be prepared and packaged then delivered to 
+          any affected areas and individuals by the caterers.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Breadcrumb -->
+<section id="bc" class="mt-3">
+  <div class="container">
+    <nav aria-label="breadcrumb">
+      <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+          <a href="{% url 'index' %}"> <i class="fas fa-home"></i> Home</a>
+        </li>
+        <li class="breadcrumb-item active">About</li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<section id="about" class="py-4">
+  <div class="container">
+    <div class="row">
+      <div class="col-md-8">
+        <h2>Entries</h2>
+        <p class="lead">
+          We have come up with a working solution that help 
+          street kids, orphanages and/or areas struck by this calamity/natural disaster.
+        </p>
+        <img src="{% static 'img/about.jpg' %}" alt="" />
+        <p class="mt-4">
+          Any Shop, Orphanage Hotel that is registered with us will receive payments
+          from various individuals who are from the residential area or elsewhere 
+          across the globe. Small contributions made will be able to feed any starving
+          individual and through delieveries and any manager managing this can 
+          distribute the food among the individuals.
+        </p>
+      </div>
+      <div class="col-md-4">
+        {% if mvp_caters %} {% for cater in mvp_caters %}
+        <div class="card">
+          <img
+            class="card-img-top"
+            src="{{ cater.photo.url }}"
+            alt="Caterer of the month"
+          />
+          <div class="card-body">
+            <h5 class="card-title">Our Top agent</h5>
+            <h6 class="text-secondary">{{ cater.name }}</h6>
+            <p class="card-text">{{ cater.description }}</p>
+          </div>
+        </div>
+        {% endfor %} {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Work -->
+<section id="work" class="bg-dark text-white text-center">
+  <h2 class="display-4">Our Service is the best</h2>
+  <h4>
+    We have caterers whose major role will be to ensure that the food is
+    fresh and well packaged for the individuals. 
+  </h4>
+  <hr />
+  <a href="{% url 'entries' %}" class="btn btn-secondary text-white btn-lg"
+    >View Our Featured Entries</a
+  >
+</section>
+
+<!-- Team -->
+<section id="team" class="py-5">
+  <div class="container">
+    <h2 class="text-center">Our Caters</h2>
+    <div class="row text-center">
+      {% if caters %} {% for cater in caters %}
+      <div class="col-md-4">
+        <img
+          src="{{ cater.photo.url }}"
+          alt=""
+          class="rounded-circle mb-3"
+        />
+        <h4>{{ cater.name }}</h4>
+        <p class="text-success">
+          <i class="fas fa-award text-success mb-3"></i> Cater
+        </p>
+        <hr />
+        <p><i class="fas fa-phone"></i> {{ cater.phone }}</p>
+        <p><i class="fas fa-envelope-open"></i> {{ cater.email }}</p>
+      </div>
+      {% endfor %} {% else %}
+      <div class="col-md-12">
+        <p>No Caters Available</p>
+      </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+{% endblock %}
