@@ -1,6 +1,6 @@
 ### Hi there 👋
 
-- 🔭 I’m currently working on Mobile Apps
-- 🌱 I’m currently learning Kotlin
-- 💬 Ask me about Flutter or Django Rest
+- 🔭 I’m currently working on Legacy
+- 🌱 I’m currently learning C++
+- 💬 Ask me about Kotlin or Java
 - 📫 How to reach me: bryoastyl@gmail.com
